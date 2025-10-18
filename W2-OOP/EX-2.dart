@@ -1,54 +1,55 @@
 class BankAccount {
-    // TODO
-    final int id;
-    final String name;
-    final String _cardNum;
-    double _balance;
+  // TODO
+  final int id;
+  final String name;
+  final String _cardNum;
+  double _balance;
 
-    // Getter
-    String get cardNum => _cardNum;
-    double get balance => _balance;
+  // Getter
+  String get cardNum => _cardNum;
+  double get balance => _balance;
 
-    BankAccount(this.id, this.name, this._cardNum, this._balance);
+  BankAccount(this.id, this.name, this._cardNum) : _balance = 0.0;
 
-    // Methods
-    void credit(double amount){
-      _balance += amount;
+  // Methods
+  void credit(double amount) {
+    _balance += amount;
+  }
+
+  void withdraw(double amount) {
+    if (_balance - amount < 0) {
+      throw Exception("Insufficiant balance!!!");
+    } else {
+      _balance -= amount;
     }
-    
-    void withdraw(double amount){
-      if (_balance - amount < 0){
-        throw Exception("Insufficiant balance!!!");
-      } else {
-        _balance -= amount;
-      }
-    }
-
+  }
 }
 
 class Bank {
-    // TODO
-    final String name;
-    final Map<int, BankAccount> _account = {};
+  // TODO
+  final String name;
+  final Map<int, BankAccount> _account = {};
 
-    Bank({required this.name});
+  Bank({required this.name});
 
-    BankAccount createAccount(int accountId, String accountName, String accountNum, double accountBalance){
-      if (_account.containsKey(accountId)){
-        throw Exception("ID already exist, Please choose another ID");
-      } else {
-        final account = BankAccount(accountId, accountName, accountNum, accountBalance);
-        _account[accountId] = account;
-        return account;
-      }
+  BankAccount createAccount(
+    int accountId,
+    String accountName,
+    String accountNum,
+  ) {
+    if (_account.containsKey(accountId)) {
+      throw Exception("ID already exist, Please choose another ID");
+    } else {
+      final account = BankAccount(accountId, accountName, accountNum);
+      _account[accountId] = account;
+      return account;
     }
-
+  }
 }
- 
-void main() {
 
+void main() {
   Bank myBank = Bank(name: "CADT Bank");
-  BankAccount ronanAccount = myBank.createAccount(100, 'Ronan', '123-456-789', 0.0);
+  BankAccount ronanAccount = myBank.createAccount(100, 'Ronan', '123-456-789');
 
   print(ronanAccount.balance); // Balance: $0
   ronanAccount.credit(100);
@@ -63,7 +64,11 @@ void main() {
   }
 
   try {
-    myBank.createAccount(100, 'Honlgy', '111-222-333', 0.0); // This will throw an exception
+    myBank.createAccount(
+      100,
+      'Honlgy',
+      '111-222-333',
+    ); // This will throw an exception
   } catch (e) {
     print(e); // Output: Account with ID 100 already exists!
   }

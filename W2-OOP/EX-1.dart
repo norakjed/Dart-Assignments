@@ -3,15 +3,15 @@ enum Skill { FLUTTER, DART, OTHER }
 class Address {
   final String street, city, zipCode;
 
-  Address(this.street, this.city, this.zipCode); 
+  Address(this.street, this.city, this.zipCode);
 }
 
 class Employee {
-  String _name;
-  double _baseSalary;
-  List<Skill> _skills;
-  Address _address;
-  int _yearsOfExperience;
+  final String _name;
+  final double _baseSalary;
+  final List<Skill> _skills;
+  final Address _address;
+  final int _yearsOfExperience;
 
   // Getter
   String get name => _name;
@@ -21,11 +21,21 @@ class Employee {
   int get yearsOfExperience => _yearsOfExperience;
 
   // Default Employee Contructor
-  Employee(this._name, this._baseSalary, this._skills, this._address, this._yearsOfExperience);
+  Employee(
+    this._name,
+    this._baseSalary,
+    this._skills,
+    this._address,
+    this._yearsOfExperience,
+  );
 
   // Mobile-developer Contructors
-  Employee.mobileDeveloper(String name, double baseSalary, Address address, int yearsOfExperience)
-    : _name = name,
+  Employee.mobileDeveloper(
+    String name,
+    double baseSalary,
+    Address address,
+    int yearsOfExperience,
+  ) : _name = name,
       _baseSalary = baseSalary,
       _address = address,
       _yearsOfExperience = yearsOfExperience,
@@ -33,16 +43,18 @@ class Employee {
 
   // Methods
   void printDetails() {
-    print('Employee: ${_name}, Base Salary: \$${_baseSalary}\nTotal Salary: ${calculateSalary()}');
+    print(
+      'Employee: ${_name}, Base Salary: \$${_baseSalary}\nTotal Salary: ${calculateSalary()}',
+    );
   }
-  
-  double calculateSalary(){
+
+  double calculateSalary() {
     double total = _baseSalary;
 
-    total += _yearsOfExperience;
+    total += (_yearsOfExperience * 2000);
 
-    for (var skills in _skills){
-      switch (skills){
+    for (var skills in _skills) {
+      switch (skills) {
         case Skill.DART:
           total += 3000;
           break;
@@ -56,18 +68,33 @@ class Employee {
     }
 
     return total;
-
   }
-  
 }
 
 void main() {
-  var emp1 = Employee('Sokea', 40000, [Skill.DART], Address('Street 123', 'Phnom Penh', '123'), 3 );
+  var emp1 = Employee(
+    'Sokea',
+    40000,
+    [Skill.DART],
+    Address('Street 123', 'Phnom Penh', '123'),
+    3,
+  );
   emp1.printDetails();
 
-  var emp2 = Employee('Ronan', 45000, [Skill.FLUTTER], Address('Street 456', 'Phnom Penh', '456'), 4 );
+  var emp2 = Employee(
+    'Ronan',
+    45000,
+    [Skill.FLUTTER],
+    Address('Street 456', 'Phnom Penh', '456'),
+    4,
+  );
   emp2.printDetails();
 
-  var emp3 = Employee.mobileDeveloper('Norakjed', 50000, Address('Street 789', 'Phnom Penh', '789'), 5);
+  var emp3 = Employee.mobileDeveloper(
+    'Norakjed',
+    50000,
+    Address('Street 789', 'Phnom Penh', '789'),
+    5,
+  );
   emp3.printDetails();
 }
