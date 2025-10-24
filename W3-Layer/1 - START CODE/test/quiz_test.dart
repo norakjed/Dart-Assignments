@@ -1,29 +1,44 @@
-import 'package:my_first_project/domain/Player.dart';
-import 'package:my_first_project/domain/answer.dart';
-import 'package:my_first_project/domain/Question.dart';
 import 'package:my_first_project/domain/quiz.dart';
 import 'package:test/test.dart';
 
 void main() {
   Question q1 = Question(
-      title: "2+2", choices: ["1", "2", "4"], goodChoice: "4", point: 10);
+    title: "Capital of France?",
+    choices: ["Paris", "London", "Rome"],
+    goodChoice: "Paris",
+    points: 60,
+  );
   Question q2 = Question(
-      title: "2+3", choices: ["1", "2", "5"], goodChoice: "5", point: 50);
+    title: "2 + 2 = ?",
+    choices: ["2", "4", "5"],
+    goodChoice: "4",
+    points: 40,
+  );
 
-  Quiz quiz = Quiz(questions: [q1, q2]);
+  Player p1 = Player(name: 'Jed');
+  Player p2 = Player(name: 'Poly');
 
-  test('Calculate score in point', () {
-    quiz.addAnswer(Answer(question: q1, answerChoice: "4")); // correct
-    quiz.addAnswer(Answer(question: q2, answerChoice: "2")); // incorrect
+  Quiz quiz = Quiz(players: [p1, p2], questions: [q1, q2]);
 
-    expect(quiz.getScoreInPoint(), 10);
+   test('All answers correct (100%)', () {
+    Answer a1 = Answer(question: q1, answerChoice: 'Paris');
+    Answer a2 = Answer(question: q2, answerChoice: '4');
 
-    int scoreInPoint = quiz.getScoreInPoint();
+    quiz.addAnswer(p1, a1);
+    quiz.addAnswer(p1, a2);
 
-    quiz.addPlayer(Player(name: "Alice", score: scoreInPoint));
+    expect(quiz.getScoreInPercentage(p1), 100);
+    expect(quiz.getScore(p1), 100);
+  });
 
-    expect(quiz.players.length, 1);
-    expect(quiz.players[0].name, "Alice");
-    expect(quiz.players[0].score, 10);
+  test('One answer wrong (50%)', () {
+    Answer a1 = Answer(question: q1, answerChoice: 'Paris');
+    Answer a2 = Answer(question: q2, answerChoice: '5');
+
+    quiz.addAnswer(p2, a1);
+    quiz.addAnswer(p2, a2);
+
+    expect(quiz.getScoreInPercentage(p2), 50);
+    expect(quiz.getScore(p2), 60);
   });
 }

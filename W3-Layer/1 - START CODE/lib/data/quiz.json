@@ -1,0 +1,56 @@
+{
+  "createdAt": "2025-10-24T15:25:46.359778",
+  "items": [
+    {
+      "id": "dfcad152-2d4b-42f9-aee5-2ad1418c851f",
+      "prompt": "Capital of France?",
+      "options": [
+        "Paris",
+        "London",
+        "Rome"
+      ],
+      "correctOption": "Paris",
+      "scoreValue": 60
+    },
+    {
+      "id": "ed0650cf-416b-4e48-8103-61ae5c7f99d7",
+      "prompt": "2 + 2 = ?",
+      "options": [
+        "2",
+        "4",
+        "5"
+      ],
+      "correctOption": "4",
+      "scoreValue": 40
+    }
+  ],
+  "participants": [
+    {
+      "id": "45a4d450-9efb-4ece-9c5d-7ec6f802545d",
+      "displayName": "Jed",
+      "responses": [
+        {
+          "id": "b3e615c4-078a-4dd0-9176-c1c465232d63",
+          "itemId": "dfcad152-2d4b-42f9-aee5-2ad1418c851f",
+          "selectedOption": "Paris",
+          "timestamp": "2025-10-24T15:25:37.903167"
+        },
+        {
+          "id": "f654da24-6313-484d-95f6-af025fa4c3c9",
+          "itemId": "ed0650cf-416b-4e48-8103-61ae5c7f99d7",
+          "selectedOption": "4",
+          "timestamp": "2025-10-24T15:25:39.975579"
+        }
+      ],
+      "scoreValue": 100,
+      "performance": 100.0
+    },
+    {
+      "id": "abf13fbc-8cd9-48e6-9a2e-cd663af56439",
+      "displayName": "hab",
+      "responses": [],
+      "scoreValue": 0,
+      "performance": 0.0
+    }
+  ]
+}

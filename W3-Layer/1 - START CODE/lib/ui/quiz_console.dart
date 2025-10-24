@@ -1,47 +1,41 @@
-import '../domain/answer.dart';
-import '../domain/Player.dart';
-import '../domain/quiz.dart';
 import 'dart:io';
+import '../domain/quiz.dart';
 
 class QuizConsole {
   Quiz quiz;
 
   QuizConsole({required this.quiz});
 
-  void startQuiz() {
-    print("--- Welcome to the Quiz ---");
+  void startQuiz(Player player) {
+    print('');
+    for (var question in quiz.questions) {
+      print('Question: ${question.title} - ( ${question.points} points )');
+      print('Choices: ${question.choices}');
+      stdout.write('Your answer: ');
+      String? userInput = stdin.readLineSync();
 
-    while (true) {
-      stdout.write("\nYour name: ");
-      String? name = stdin.readLineSync();
-
-      if (name == null || name.isEmpty) {
-        print("\n--- Quiz Finished ---");
-        quiz.displayScore();
-        break;
+      if (userInput != null && userInput.isNotEmpty) {
+        Answer answer = Answer(question: question, answerChoice: userInput);
+        quiz.addAnswer(player, answer);
+      } else {
+        print('No answer entered. Skipping question.\n');
       }
-
-      quiz.answers = []; // reset answers each time
-
-      for (var question in quiz.questions) {
-        print("\nQuestion: ${question.title} - (${question.point} points)");
-        print("Choices: ${question.choices}");
-        stdout.write("Your answer: ");
-        String? answer = stdin.readLineSync() ?? "";
-
-        quiz.addAnswer(Answer(question: question, answerChoice: answer));
-      }
-
-      int scoreInPoint = quiz.getScoreInPoint();
-      int scoreInPercentage = quiz.getScoreInPercentage();
-
-      // Create and add player with their score
-      Player player = Player(name: name, score: scoreInPoint);
-      quiz.addPlayer(player);
-
-      print(
-          "$name, your score in percentage: $scoreInPercentage% | in points: $scoreInPoint");
-      quiz.displayScore();
     }
+  }
+
+  void printResult(Player player, Map<String, int> allPlayerScore) {
+    int scoreInPercentage = quiz.getScoreInPercentage(player);
+    int scoreInPoints = quiz.getScore(player);
+
+    print('');
+    print('${player.name}, your score in percentage: $scoreInPercentage %');
+    print('${player.name}, your score in points: $scoreInPoints\n');
+
+    allPlayerScore[player.name] = scoreInPoints;
+
+    for (var entry in allPlayerScore.entries) {
+      print('Player: ${entry.key}\tScore:${entry.value}');
+    }
+    print('');
   }
 }
