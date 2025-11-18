@@ -58,13 +58,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - lib/W5-Stateless Widgets/EX3/assets/dart.png
-    - lib/W5-Stateless Widgets/EX3/assets/flutter.png
-    - lib/W5-Stateless Widgets/EX3/assets/firebase.png
-    - lib/W5-Stateless Widgets/EX4/assets/cloudy.png
-    - lib/W5-Stateless Widgets/EX4/assets/sunny.png
-    - lib/W5-Stateless Widgets/EX4/assets/sunnyCloudy.png
-    - lib/W5-Stateless Widgets/EX4/assets/veryCloudy.png
+  - assets/images/dice/
+  - assets/images/W8/Challenge/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
