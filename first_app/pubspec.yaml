@@ -60,6 +60,7 @@ flutter:
   assets:
   - assets/images/dice/
   - assets/images/W8/Challenge/
+  - assets/images/W8/w4-s2/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
