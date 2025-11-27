@@ -13,11 +13,11 @@ class ImageGallery extends StatefulWidget {
 
 class _ImageGalleryState extends State<ImageGallery> {
   List<String> images = [
-    "assets/images/W8/w4-s2/bird.jpg",
-    "assets/images/W8/w4-s2/bird2.jpg",
-    "assets/images/W8/w4-s2/insect.jpg",
-    "assets/images/W8/w4-s2/girl.jpg",
-    "assets/images/W8/w4-s2/man.jpg",
+    "assets/images/W7/w4-s2/bird.jpg",
+    "assets/images/W7/w4-s2/bird2.jpg",
+    "assets/images/W7/w4-s2/insect.jpg",
+    "assets/images/W7/w4-s2/girl.jpg",
+    "assets/images/W7/w4-s2/man.jpg",
   ];
 
   int currentIndex = 0;
