@@ -1,3 +1,4 @@
+import 'package:first_app/W8-List%20&%20Callback/EXERCISE-3/data/profile_data.dart';
 import 'package:first_app/W8-List%20&%20Callback/EXERCISE-3/model/profile_tile_model.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class ProfileApp extends StatelessWidget {
             const SizedBox(height: 40),
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('assets/images/w8/aang.png'),
+              backgroundImage: AssetImage(ronanProfile.avatarUrl)
             ),
             const SizedBox(height: 20),
             Text(
