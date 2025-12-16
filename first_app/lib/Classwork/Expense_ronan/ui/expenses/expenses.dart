@@ -1,42 +1,33 @@
 import 'package:flutter/material.dart';
 import '../../models/expense.dart';
 
-class ExpensesView extends StatefulWidget {
-  const ExpensesView({super.key});
+class ExpensesView extends StatelessWidget {  // ← Changed to StatelessWidget
+  final List<Expense> expenses;  // ← Add this parameter
 
-  @override
-  State<ExpensesView> createState() {
-    return _ExpensesViewState();
-  }
-}
+  const ExpensesView({
+    super.key,
+    required this.expenses,  // ← Add this
+  });
 
-class _ExpensesViewState extends State<ExpensesView> {
-  final List<Expense> _expenses = [
-    Expense(
-      title: 'Flutter Course',
-      amount: 19.99,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    Expense(
-      title: 'Cinema',
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-  ];
-
-
-  
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _expenses.length,
-      itemBuilder: (context, index) => ExpenseItem(expense: _expenses[index]),
-    );
+    return expenses.isEmpty
+        ? const Center(
+            child: Text(
+              'No expenses yet. Add one!',
+              style: TextStyle(fontSize: 18),
+            ),
+          )
+        : ListView.builder(
+            itemCount: expenses.length,
+            itemBuilder: (context, index) => ExpenseItem(
+              expense: expenses[index],
+            ),
+          );
   }
 }
 
+// ExpenseItem widget (keep as is or update)
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem({super.key, required this.expense});
 
@@ -45,46 +36,56 @@ class ExpenseItem extends StatelessWidget {
   IconData get expenseIcon {
     switch (expense.category) {
       case Category.food:
-        return Icons.free_breakfast;
+        return Icons.restaurant;
       case Category.travel:
-        return Icons.travel_explore;
+        return Icons.flight;
       case Category.leisure:
-        return Icons.holiday_village;
+        return Icons.movie;
       case Category.work:
         return Icons.work;
     }
   }
 
   String get expenseDate {
-    return "11/54/25";
+    return "${expense.date.day}/${expense.date.month}/${expense.date.year}";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    expense.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  expense.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  Text("${expense.amount.toStringAsPrecision(2)} \$"),
-                ],
-              ),
-              Spacer(),
-              Row(children: [Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Icon(expenseIcon),
-              ), Text(expenseDate)]),
-            ],
-          ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  '\$${expense.amount.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                Icon(expenseIcon, color: Colors.blue[700]),
+                const SizedBox(width: 8),
+                Text(expenseDate),
+              ],
+            ),
+          ],
         ),
       ),
     );
