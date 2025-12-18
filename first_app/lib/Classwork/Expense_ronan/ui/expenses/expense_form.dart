@@ -17,7 +17,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
   DateTime date = DateTime.now();
 
   void onCreate() {
-    // 1 - Create the new expense
+    // Create the new expense
     final title = _titleController.text.trim();
     final amountText = _amountController.text.trim();
     final amount = double.tryParse(amountText);
@@ -39,7 +39,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
           ],
         ),
       );
-      return; 
+      return;
     }
 
     Expense newExpense = Expense(
@@ -49,10 +49,9 @@ class _ExpenseFormState extends State<ExpenseForm> {
       category: _selectedCategory,
     );
 
-    // 2  - Forward the new expense to the parent
+    // Forward the new expense to the parent
     widget.onExpenseCreated(newExpense);
 
-    // 3- Close the modal
     Navigator.pop(context);
   }
 
