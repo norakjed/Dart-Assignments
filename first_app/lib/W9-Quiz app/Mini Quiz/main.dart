@@ -1,4 +1,4 @@
-import 'package:first_app/W9-/Mini%20Quiz/Data/players_data.dart';
+import 'package:first_app/W9-Quiz%20app/Mini%20Quiz/Data/players_data.dart';
 import 'package:flutter/material.dart';
 import 'Data/questions_data.dart';
 import 'UI/Screens/question_screen.dart';
